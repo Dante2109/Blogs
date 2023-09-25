@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useContext, useState } from 'react'
 
 export default function Home() {
-  const {GoogleSignIn,handleSigninWithEmailAndPass,createUser}=useContext(AuthContext)
+const {GoogleSignIn,handleSigninWithEmailAndPass,createUser}=useContext(AuthContext)
   const [state,setState]=useState({email:"",password:""})
 
   const change=(e)=>{
