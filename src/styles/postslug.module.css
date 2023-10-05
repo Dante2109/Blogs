@@ -1,6 +1,21 @@
-.description{
+.type>strong>code{
+    font-size: 25px;
 
+}
+p.rating{
+    font-size: 20px;
+}
+
+p.description,p.moreinfo{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;    
 }
 .image{
     width: 800px;
+}
+
+.location>strong>em{
+    font-size: 25px;
+    font-weight: 500;
 }

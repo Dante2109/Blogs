@@ -2,26 +2,33 @@
 import { AuthContext } from '@/Context/authContext';
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
-
+import Logo from "../../../Assets/Logo.png"
+import Image from 'next/image';
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const {user}=useContext(AuthContext)
+  const {data}=useContext(AuthContext)
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  const handleBlogAccess=()=>{
+      
+  }
+
   useEffect(()=>{
-    console.log(user)
   },[])
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div>
-          <Link href="#" className="text-white text-lg font-bold">Logo</Link>
+    <nav className="bg-gray-800 py-4  z-10">
+      <div className="container mx-auto flex justify-between px-5 md:px-10">
+        <div className='justify-self-center'>
+          <Link href="#" className="text-white text-lg font-bold">
+          <Image src={Logo} width={60}></Image>
+          </Link>
         </div>
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden md:flex items-center space-x-16">
           <Link href="/" className="text-white">Home</Link>
-          <Link href="/Blogs" className="text-white">Blogs</Link>
+          <Link href="/blogs"  className="text-white">Blogs</Link>
           <Link href="/about" className="text-white">About</Link>
+          <Link href="/Login&Signup" className="text-white">{data?"Profile":"Login / Signup"}</Link>
         </div>
         <div className="md:hidden flex items-center">
           <button onClick={toggleMobileMenu} className="text-white focus:outline-none">
@@ -33,9 +40,10 @@ const Navbar = () => {
       </div>
 
       <div className={`md:hidden ${isMobileMenuOpen ? '' : 'hidden'}`}>
-        <Link href="#" className="block text-white py-2 px-4">Home</Link>
-        <Link href="#" className="block text-white py-2 px-4">About</Link>
-        <Link href="#" className="block text-white py-2 px-4">Blogs</Link>
+        <Link href="/" className="block text-white py-2 px-4">Home</Link>
+        <Link href="/blogs" className="block text-white py-2 px-4">Blogs</Link>
+        <Link href="about" className="block text-white py-2 px-4">About</Link>
+        <Link href="/Login&Signup" className="text-white">Login / Signup</Link>
       </div>
     </nav>
   );

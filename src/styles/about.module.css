@@ -1,0 +1,17 @@
+.card{
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    gap:20
+
+}
+.container{
+    max-width: 1200px;
+    margin:auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.card>h1{
+    font-weight: bold;
+    font-size: larger;
+}

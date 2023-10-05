@@ -1,47 +1,103 @@
 "use client"
-import { useContext,useEffect,createContext,useState } from "react";
+import { useEffect,createContext,useState } from "react";
 import {signInWithEmailAndPassword,
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
-  TwitterAuthProvider,
-  GithubAuthProvider,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendEmailVerification
 } from "firebase/auth"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
+
 export const AuthContext=createContext()
+
 import {auth} from "../app/firebase"
+import { create,del } from "@/app/actions";
+
 const AuthContextProvider = ({children}) => {
-  const handleSigninWithEmailAndPass=async(email,password)=>{
+  const [data,setData]=useState(null)
+
+  useEffect(()=>{
+    auth.onAuthStateChanged(user=>{setData(user)})
+    
+  },[])
+  // Sign in with email and password
+  const handleSigninWithEmailAndPass=async({email,password})=>{
     try {
-      const provider=signInWithEmailAndPassword(auth,email,password).then((cred)=>console.log(cred  ))
+      let user=await signInWithEmailAndPassword(auth,email,password)
+      auth.onAuthStateChanged( async user=>{
+        setData(user)
+        if(user){
+          let token=await user.getIdToken(false)
+          toast("Logged in Successfully")
+          create(token)
+        }
+      }) 
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  // create user with email and password
+  const createUser=async ({email,password,name})=>{
+    try {
+      let user= await createUserWithEmailAndPassword(auth, email, password)
+      await updateProfile(auth.currentUser, {
+        displayName: name,
+      })
+      auth.onAuthStateChanged(async user=>{
+        setData(user)
+        if(user){
+          let token=await user.getIdToken(false)
+          toast("Logged in Successfully")
+          create(token)
+        }
+      })  
+          
+      await sendEmailVerification(auth.currentUser).then(() => {
+        // Email verification sent!
+        alert("Email Verification Sent")
+      });
       
     } catch (error) {
       console.log(error)
     }
   }
-  const createUser=(email,password)=>{
-    createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    console.log(userCredential)
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(error)
-    // ..
-  });
-  }
-  const GoogleSignIn=()=>{
-    const provider=new GoogleAuthProvider();
-    signInWithPopup(auth,provider).then((cred)=>console.log(cred)).catch(e=>console.log(e))
+  
+  // Sign in with google sign in providers
+  const GoogleSignIn=async()=>{
+    try {
+      
+      const provider=new GoogleAuthProvider();
+      await signInWithPopup(auth,provider)
+      auth.onAuthStateChanged(async user=>{
+        setData(user)
+        if(user){
+          let token=await user.getIdToken(false)
+          toast("Logged in Successfully")
+          create(token)
+        }
+      })        
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-
+  // Sign out 
+  const handleSignout=()=>{
+    signOut(auth).then(()=>{
+      alert("Successfully logged out")
+      setData(null)
+      del()
+    }).catch(error=>{console.log(error)})
+  }
 
   return (
-    <AuthContext.Provider value={{user:"Akshay",GoogleSignIn,handleSigninWithEmailAndPass,createUser}}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{GoogleSignIn,handleSigninWithEmailAndPass,createUser,handleSignout,auth,data}}>{children}</AuthContext.Provider>
   );
 }
 

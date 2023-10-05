@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React from 'react';
 import Post from '../Components/post';
+import styles from "../../styles/blogs.module.css"
 
 
-
-export async function generateMetadata(){
+export function generateMetadata(){
     return {
       title: "Blogs - NextJS 13"
     }
@@ -19,8 +19,9 @@ const Blogs = async() => {
   }
   if(data){
     return (
-      <div style={{maxWidth:"1250px"}} className='py-20 m-auto'>
-      <h1 className='text-4xl text-center mb-20'>Trending Places</h1>
+     
+      <div style={{maxWidth:"1250px"}} className='py-20 m-auto flex flex-col'>
+      <h1 className={`font-bold text-[30px] ${styles.trending} mb-20`}>Trending Places</h1>
       <div className='grid sm:grid-co ls-1 md:grid-cols-2 lg:grid-cols-3  gap-10'>
         {data.map(post => (
             <Post key={post.slug} post={post}/>
@@ -31,7 +32,8 @@ const Blogs = async() => {
   }else{
     return (<div>
       Error
-    </div>)
+    </div>
+  )
   } 
 }
 

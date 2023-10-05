@@ -7,7 +7,7 @@ const Post =({post}) => {
         updated= updated.replace(/<figure class="wp-block-image size-large is-resized"/g,`<figure class="${styles.image}"`)
         updated= updated.replace(/<p class="location"/g,`<p class="${styles.location}"`)
   return (
-    <Link href={`Blogs/${post.slug}`}>
+    <Link href={`blogs/${post.slug}`}>
     <div className={`${styles.card} flex flex-col`} > 
         <div style={{fontSize:"30px"}} dangerouslySetInnerHTML={{__html: post.title.rendered}}/>
         <div className="content" dangerouslySetInnerHTML={{ __html: updated }} ></div>

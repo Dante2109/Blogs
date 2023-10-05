@@ -1,0 +1,48 @@
+.trending::after{
+    content: "";
+    display: block;
+    width:300px;
+    max-width: 300px;
+    height: 10px;
+    background:rgb(31 41 55 );
+    left: 110%;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+.trending{
+    position: relative;
+}
+.trending::before{
+    content: "";
+    display: block;
+    max-width: 300px;
+    width:300px;
+    height: 10px;
+    background: rgb(31 41 55 );
+    right: 110%;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+@media screen and (max-width:750px) {
+    .trending::after{
+        max-width: 50px;
+    }   
+    .trending::before{
+        max-width: 50px;
+    }
+
+}
+@media screen and (max-width:300px) {
+    .trending{
+        font-size: 22px;
+    }
+    .trending::after{
+        max-width: 30px;
+    }   
+    .trending::before{
+        max-width: 30px;
+    }
+
+}

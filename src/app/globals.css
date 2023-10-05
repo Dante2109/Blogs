@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+
 /*
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -27,3 +28,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 } */
+
+.blog-post-body p {
+  @apply text-sm;
+}
+*{
+  font-family: sans-serif;
+}
