@@ -11,7 +11,7 @@ export default async function Home() {
     data= await axios.get("http://localhost/wordpress/wp-json/wp/v2/posts?per_page=3")
     data=data.data
   } catch (error) {
-    console.log(error)
+    // console.log(error)
   }
   return (
     <main className="flex min-h-screen flex-col items-center justify-between  md:p-24 max-[1200px]">

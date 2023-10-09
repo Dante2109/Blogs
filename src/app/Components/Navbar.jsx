@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
 import Logo from "../../../Assets/Logo.png"
 import Image from 'next/image';
+import { toast } from 'react-toastify';
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const {data}=useContext(AuthContext)
@@ -11,7 +12,18 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
   const handleBlogAccess=()=>{
-      
+      if(!data){
+        toast.error("Please sign in to access Blogs",{
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        })
+      }
   }
 
   useEffect(()=>{
@@ -26,7 +38,7 @@ const Navbar = () => {
         </div>
         <div className="hidden md:flex items-center space-x-16">
           <Link href="/" className="text-white">Home</Link>
-          <Link href="/blogs"  className="text-white">Blogs</Link>
+          <Link href="/blogs"  className="text-white" onClick={handleBlogAccess}>Blogs</Link>
           <Link href="/about" className="text-white">About</Link>
           <Link href="/Login&Signup" className="text-white">{data?"Profile":"Login / Signup"}</Link>
         </div>
@@ -42,8 +54,8 @@ const Navbar = () => {
       <div className={`md:hidden ${isMobileMenuOpen ? '' : 'hidden'}`}>
         <Link href="/" className="block text-white py-2 px-4">Home</Link>
         <Link href="/blogs" className="block text-white py-2 px-4">Blogs</Link>
-        <Link href="about" className="block text-white py-2 px-4">About</Link>
-        <Link href="/Login&Signup" className="text-white">Login / Signup</Link>
+        <Link href="/about" className="block text-white py-2 px-4">About</Link>
+        <Link href="/Login&Signup" className="block text-white py-2 px-4">Login / Signup</Link>
       </div>
     </nav>
   );

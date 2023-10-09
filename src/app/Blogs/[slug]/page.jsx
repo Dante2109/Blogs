@@ -1,8 +1,7 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React from "react";
 import { cache } from "react";
 import styles from "../../../styles/postslug.module.css";
-import { AuthContext } from "@/Context/authContext";
 import Link from "next/link";
 async function getBlog(slug) {
   let data = await axios.get(
@@ -19,43 +18,45 @@ export async function generateMetadata({ params }) {
   const response = await getBlogCached(params.slug);
 
   return {
-    title:
-      response.title.rendered.split(" ")[0] == "Truffles"
-        ? "Truffles - Ice & Spice"
-        : response.title.rendered + " - Nextjs 13 Blog Page",
+    title: response.title.rendered + " - Nextjs 13 Blog Page",
   };
 }
 
-export function generateStaticParams() {
-  let arr = [
-    "sunrise-dhaba",
-    "fusion-bites",
-    "momo-hut",
-    "saffron-spice",
-    "dolci-desserts",
-    "kakapo",
-    "brahmin-coffee-bar",
-    "smoke-house-deli",
-    "dakshinayan",
-    "saravana-bhavan",
-    "toit-brewpub",
-    "ardor-brewing-company",
-    "vidyarthi-bhavan",
-    "karavali",
-    "truffles-ice-spice",
-  ];
-  return arr.map((slug) => {
+export async function generateStaticParams() {
+  let data = await axios.get(
+    `http://localhost/wordpress/wp-json/wp/v2/posts?per_page=20`
+  );
+  data = data.data;
+  data = data;
+  // let arr = [
+
+  //   "sunrise-dhaba",
+  //   "fusion-bites",
+  //   "momo-hut",
+  //   "saffron-spice",
+  //   "dolci-desserts",
+  //   "kakapo",
+  //   "brahmin-coffee-bar",
+  //   "smoke-house-deli",
+  //   "dakshinayan",
+  //   "saravana-bhavan",
+  //   "toit-brewpub",
+  //   "ardor-brewing-company",
+  //   "vidyarthi-bhavan",
+  //   "karavali",
+  //   "truffles-ice-spice",
+  // ];
+  return data.map((slug) => {
     {
-      slug;
+      slug.slug;
     }
   });
 }
 const Page = async ({ params }) => {
-  let { data } = useContext(AuthContext);
-  let newData;
+  let data;
   let updated;
-  newData = await getBlogCached(params.slug);
-  updated = newData.content.rendered.replace(
+  data = await getBlogCached(params.slug);
+  updated = data.content.rendered.replace(
     /<p class="description"/g,
     `<p class="${styles.description}"`
   );
@@ -78,8 +79,7 @@ const Page = async ({ params }) => {
   );
 
   // updated= updated.replace(/<p class="location"/g,`<p class="${styles.location}"`)
-  if (data) {
-    if (newData) {
+    if (data) {
       return (
         <div
           style={{ maxWidth: "1200px", margin: "auto" }}
@@ -98,12 +98,7 @@ const Page = async ({ params }) => {
     } else {
       return <div>Error</div>;
     }
-  } else {
-      return <div>
-        <h1 className="text-[20px]">Please login first</h1>
-        <button><Link href="/Login&Signup">Login Page</Link></button>
-      </div>
-  }
+  
 };
 
 export default Page;

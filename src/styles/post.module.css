@@ -12,8 +12,8 @@
     display: none;
 }
 .card{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-    padding: 8px;
+    box-shadow: rgb(38, 57, 77) -5px 20px 30px -10px;
+    padding: 16px;
     border-radius: 12px;
     gap:10px
 }

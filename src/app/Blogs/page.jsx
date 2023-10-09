@@ -20,9 +20,9 @@ const Blogs = async() => {
   if(data){
     return (
      
-      <div style={{maxWidth:"1250px"}} className='py-20 m-auto flex flex-col'>
+      <div  className='py-20 m-auto flex flex-col max-w-[1250px]'>
       <h1 className={`font-bold text-[30px] ${styles.trending} mb-20`}>Trending Places</h1>
-      <div className='grid sm:grid-co ls-1 md:grid-cols-2 lg:grid-cols-3  gap-10'>
+      <div className='grid sm:grid-co ls-1 md:grid-cols-2 lg:grid-cols-3  gap-10 gap-y-16'>
         {data.map(post => (
             <Post key={post.slug} post={post}/>
         ))}

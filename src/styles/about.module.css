@@ -5,13 +5,72 @@
     gap:20
 
 }
+.imgs{
+    padding: 20px;
+}
 .container{
     max-width: 1200px;
     margin:auto;
     padding-top: 60px;
     padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
 }
 .card>h1{
     font-weight: bold;
     font-size: larger;
+}
+.title::after{
+    content: "";
+    display: block;
+    width:300px;
+    max-width: 300px;
+    height: 10px;
+    background:rgb(31 41 55 );
+    left: 112%;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+.title{
+    position: relative;
+    display: inline-block;
+    margin: auto;
+    margin-bottom: 50px;
+    font-weight: 800;
+    font-size: 30px;
+}
+.title::before{
+    content: "";
+    display: block;
+    width:300px;
+    max-width: 300px;
+    height: 10px;
+    background: rgb(31 41 55 );
+    right: 112%;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+}
+
+@media screen and (max-width:750px) {
+    .title::after{
+        max-width: 150px;
+    }  
+    .title::before{
+        max-width: 150px;
+    }
+
+}
+@media screen and (max-width:300px) {
+    .title{
+        font-size: 22px;
+    }
+    .title::after{
+        max-width: 30px;
+    }   
+    .title::before{
+        max-width: 30px;
+    }
+
 }
