@@ -1,3 +1,4 @@
+// api call to obtain blogs details according to the requirement
 export const getBlogs=async(per_page=20)=>{
     try {
         let data=await fetch(`http://localhost/wordpress/wp-json/wp/v2/posts?per_page=${per_page}`)
@@ -7,6 +8,7 @@ export const getBlogs=async(per_page=20)=>{
         return error
     }
 }
+// api call to obtain slug details
 export const getSlug=async(slug)=>{
     try {
         let data=await fetch(`http://localhost/wordpress/wp-json/wp/v2/posts?slug=${slug}`)
