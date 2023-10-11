@@ -54,6 +54,7 @@ const AuthBox = ({}) => {
         handleSigninWithEmailAndPass(stateLoginForm);
         setStateLoginForm(loginForm)
       } catch (error) {
+        
       }
     }
   };
