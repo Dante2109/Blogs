@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React from 'react';
 import Post from '../Components/post';
 import styles from "../../styles/blogs.module.css"
+import { getBlogs } from '../api/services';
 
 
 export function generateMetadata(){
@@ -10,13 +10,7 @@ export function generateMetadata(){
     }
 }
 const Blogs = async() => {
-  let data;
-  try {
-    data= await axios.get("http://localhost/wordpress/wp-json/wp/v2/posts?per_page=20")
-    data=data.data
-  } catch (error) {
-    console.log(error)
-  }
+  let data=await getBlogs()
   if(data){
     return (
      

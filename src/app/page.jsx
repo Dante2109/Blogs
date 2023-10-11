@@ -1,18 +1,11 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import Loading from "./loading";
 import Logo from "../../Assets/Logo.png";
 import styles from "../styles/app.module.css"
 let Post=dynamic(()=>import("./Components/post"))
-import axios from "axios";
+import { getBlogs } from "./api/services";
 export default async function Home() {
-  let data;
-  try {
-    data= await axios.get("http://localhost/wordpress/wp-json/wp/v2/posts?per_page=3")
-    data=data.data
-  } catch (error) {
-    // console.log(error)
-  }
+  let data= await getBlogs(3)
   return (
     <main className="flex min-h-screen flex-col items-center justify-between  md:p-24 max-[1200px]">
       {/* Banner start*/}

@@ -18,9 +18,9 @@ const AuthBox = ({}) => {
     email: "",
     password: "",
   }
-  const [sform, setSform] = useState(signupForm);
+  const [stateSignupform, setStateSignupForm] = useState(signupForm);
 
-  const [lform, setLform] = useState(loginForm);
+  const [stateLoginForm, setStateLoginForm] = useState(loginForm);
 
   const {
     GoogleSignIn,
@@ -35,24 +35,24 @@ const AuthBox = ({}) => {
   };
 
   const handleSChange = (e) => {
-    setSform({ ...sform, [e.target.name]: e.target.value });
+    setStateSignupForm({ ...stateSignupform, [e.target.name]: e.target.value });
   };
   const handleLChange = (e) => {
-    setLform({ ...lform, [e.target.name]: e.target.value });
+    setStateLoginForm({ ...stateLoginForm, [e.target.name]: e.target.value });
   };
 
   const submit = async (event) => {
     event.preventDefault();
     if (isSignup) {
       try {
-        await createUser(sform);
-        setSform(signupForm)
+        await createUser(stateSignupform);
+        setStateSignupForm(signupForm)
       } catch (error) {
       }
     } else {
       try {
-        handleSigninWithEmailAndPass(lform);
-        setLform(loginForm)
+        handleSigninWithEmailAndPass(stateLoginForm);
+        setStateLoginForm(loginForm)
       } catch (error) {
       }
     }
@@ -102,7 +102,7 @@ const AuthBox = ({}) => {
                 type="text"
                 name="name"
                 onChange={(e) => handleSChange(e)}
-                value={sform.name}
+                value={stateSignupform.name}
                 placeholder="Full Name"
                 required
               />
@@ -111,7 +111,7 @@ const AuthBox = ({}) => {
                 type="email"
                 name="email"
                 onChange={(e) => handleSChange(e)}
-                value={sform.email}
+                value={stateSignupform.email}
                 placeholder="Email"
                 required
               />
@@ -120,7 +120,7 @@ const AuthBox = ({}) => {
                 type="password"
                 name="password"
                 onChange={(e) => handleSChange(e)}
-                value={sform.password}
+                value={stateSignupform.password}
                 placeholder="Password"
                 required
               />
@@ -129,7 +129,7 @@ const AuthBox = ({}) => {
                 type="password"
                 name="cpassword"
                 onChange={(e) => handleSChange(e)}
-                value={sform.cpassword}
+                value={stateSignupform.cpassword}
                 placeholder="Confirm Password"
                 required
               />
@@ -141,7 +141,7 @@ const AuthBox = ({}) => {
                 type="text"
                 name="email"
                 onChange={(e) => handleLChange(e)}
-                value={lform.email}
+                value={stateLoginForm.email}
                 placeholder="Email"
               />
               <input
@@ -149,7 +149,7 @@ const AuthBox = ({}) => {
                 type="password"
                 name="password"
                 onChange={(e) => handleLChange(e)}
-                value={lform.password}
+                value={stateLoginForm.password}
                 placeholder="Password"
               />
             </>

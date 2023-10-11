@@ -1,51 +1,19 @@
-import axios from "axios";
 import React from "react";
 import { cache } from "react";
 import styles from "../../../styles/postslug.module.css";
-import Link from "next/link";
-async function getBlog(slug) {
-  let data = await axios.get(
-    `http://localhost/wordpress/wp-json/wp/v2/posts?slug=${slug}`
-  );
-  data = data.data;
-  data = data[0];
-  return data;
-}
+import { getSlug,getBlogs } from "@/app/api/services";
 
-const getBlogCached = cache(getBlog);
 
 export async function generateMetadata({ params }) {
-  const response = await getBlogCached(params.slug);
-
+  const response = await getSlug(params.slug);
+  console.log(response)
   return {
     title: response.title.rendered + " - Nextjs 13 Blog Page",
   };
 }
 
 export async function generateStaticParams() {
-  let data = await axios.get(
-    `http://localhost/wordpress/wp-json/wp/v2/posts?per_page=20`
-  );
-  data = data.data;
-  data = data;
-  // let arr = [
-
-  //   "sunrise-dhaba",
-  //   "fusion-bites",
-  //   "momo-hut",
-  //   "saffron-spice",
-  //   "dolci-desserts",
-  //   "kakapo",
-  //   "brahmin-coffee-bar",
-  //   "smoke-house-deli",
-  //   "dakshinayan",
-  //   "saravana-bhavan",
-  //   "toit-brewpub",
-  //   "ardor-brewing-company",
-  //   "vidyarthi-bhavan",
-  //   "karavali",
-  //   "truffles-ice-spice",
-  // ];
+  let data = await getBlogs()
   return data.map((slug) => {
     {
       slug.slug;
@@ -55,7 +23,7 @@ export async function generateStaticParams() {
 const Page = async ({ params }) => {
   let data;
   let updated;
-  data = await getBlogCached(params.slug);
+  data = await getSlug(params.slug);
   updated = data.content.rendered.replace(
     /<p class="description"/g,
     `<p class="${styles.description}"`

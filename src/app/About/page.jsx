@@ -1,6 +1,14 @@
 import React from "react";
 import styles from "../../styles/about.module.css";
 import Image from "next/image";
+
+
+export  function generateMetadata({ params }) {
+
+  return {
+    title: "About - Nextjs 13 Blog Page",
+  };
+}
 const About = () => {
   return (
     <div className={`${styles.container} m-auto`}>
