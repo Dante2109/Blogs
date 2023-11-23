@@ -14,7 +14,7 @@ const About = () => {
     <div className={`${styles.container} m-auto`}>
       <h1 className={`${styles.title}`}>About</h1>
       <div
-        className={`${styles.grid} grid grid-cols-1 md:grid-cols-2 justify-center md:pl-10 items-start content-start gap-20 m-auto`}
+        className={`${styles.grid} grid grid-cols-1 md:grid-cols-2 justify-center md:pl-10 items-start content-start gap-20 m-auto md:ml-12`}
       >
         <div className={`${styles.card}`}>
           <h1>Exploring Bangalore's Culinary Delights:</h1>

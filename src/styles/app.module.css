@@ -12,6 +12,7 @@
 }
 .trending{
     position: relative;
+    font-weight: 800;
 }
 .trending::before{
     content: "";

@@ -55,7 +55,7 @@ const Navbar = () => {
         <Link href="/" className="block text-white py-2 px-4">Home</Link>
         <Link href="/blogs" className="block text-white py-2 px-4">Blogs</Link>
         <Link href="/about" className="block text-white py-2 px-4">About</Link>
-        <Link href="/Login&Signup" className="block text-white py-2 px-4">Login / Signup</Link>
+        <Link href="/Login&Signup" className="block text-white py-2 px-4">{data?"Profile":"Login / Signup"}</Link>
       </div>
     </nav>
   );

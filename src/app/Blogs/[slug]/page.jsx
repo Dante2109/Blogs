@@ -1,12 +1,11 @@
 import React from "react";
-import { cache } from "react";
 import styles from "../../../styles/postslug.module.css";
 import { getSlug,getBlogs } from "@/app/api/services";
 
 
 export async function generateMetadata({ params }) {
   const response = await getSlug(params.slug);
-  console.log(response)
+
   return {
     title: response.title.rendered + " - Nextjs 13 Blog Page",
   };

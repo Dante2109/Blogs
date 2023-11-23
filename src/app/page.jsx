@@ -16,7 +16,6 @@ export default async function Home() {
           backgroundImage:`url("https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg")`,
         }}
       >
-        {/* <Image src={"https://www.cypressgreen.in/blog/wp-content/uploads/2021/03/food.jpg"} width={100} height={20}/> */}
         <div
           className="flex justify-between flex-col md:flex-row  p-10 items-center text-lg font-medium gap-14 text-white"
           style={{ backgroundColor: "rgb(0,0,0,0.5)" }}
